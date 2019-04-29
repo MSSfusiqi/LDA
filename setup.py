@@ -4,7 +4,7 @@ import re, uuid
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
-VERSIONFILE = "tweepy/__init__.py"
+VERSIONFILE = "lda_em/__init__.py"
 ver_file = open(VERSIONFILE, "rt").read()
 VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
 mo = re.search(VSRE, ver_file, re.M)
