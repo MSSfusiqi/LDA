@@ -1,27 +1,43 @@
-import setuptools
+#!/usr/bin/env python
+#from distutils.core import setup
+import re, uuid
+from setuptools import setup, find_packages
+from pip.req import parse_requirements
 
+VERSIONFILE = "tweepy/__init__.py"
+ver_file = open(VERSIONFILE, "rt").read()
+VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
+mo = re.search(VSRE, ver_file, re.M)
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+if mo:
+    version = mo.group(1)
+else:
+    raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
 
-setuptools.setup(
-    name='lda_em',
-    version='1.5',
-    scripts=['lda_em'] ,
-    author="Deepak Kumar",
-    author_email="deepak.kumar.iet@gmail.com",
-    description="A Docker and AWS utility package",
-    long_description=open("README.md").read(),
-    long_description_content_type="text/markdown",
-    url="https://github.com/MSSfusiqi/STA-663-final-project",
-    packages=setuptools.find_packages(),
-    py_modules=['ecs_helper', 'docker_helper', 'slack_api'],
-    install_requires=[
-        'requests', 'click', 'configparser'
-    ],
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-    ],
- )
+install_reqs = parse_requirements('requirements.txt', session=uuid.uuid1())
+reqs = [str(req.req) for req in install_reqs]
+
+setup(name="lda_em",
+      version=version,
+      description="LDA library for python",
+      license="MIT",
+      author="Yizi Lin, Siqi Fu",
+      author_email="fusiqi@bu.edu",
+      url="https://github.com/MSSfusiqi/STA-663-final-project",
+      packages=find_packages(exclude=['tests']),
+      install_requires=reqs,
+      keywords="lda library",
+      classifiers=[
+          'Development Status :: 4 - Beta',
+          'Topic :: Software Development :: Libraries',
+          'License :: OSI Approved :: MIT License',
+          'Operating System :: OS Independent',
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 2',
+          'Programming Language :: Python :: 2.6',
+          'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3.3',
+          'Programming Language :: Python :: 3.4',
+      ],
+      zip_safe=True)
