@@ -1,7 +1,9 @@
 # STA 663 Final Project
 ###  Yizi Lin, Siqi Fu
 
-sdata: sumulated dataset<br>
-data: real dataset<br>
-report: final report<br>
+LDA package reop:https://github.com/lyz1206/lda <br>
+
+Content:
+1. data : paper dataset, real dataset
+2. report : final report
 
